@@ -1,11 +1,17 @@
 require("dotenv").config();
 require("express-async-errors");
 const express = require("express");
+const cors = require("cors");
 const db = require("./utils/database");
 const app = express();
 
 // middlewares
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 // db.sync({ force: !true }).then(() => {
 //   Customer.create({
