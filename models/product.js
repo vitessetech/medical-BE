@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const db = require("../utils/database");
 
-const Product = db.define("product", {
+const Product = db.define("product2", {
   id: {
     primaryKey: true,
     type: Sequelize.INTEGER,
@@ -16,6 +16,10 @@ const Product = db.define("product", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  img: {
+    type: Sequelize.STRING,
+    // allowNull: false,
   },
   // todo : add udhariId here as foregn Key
 });

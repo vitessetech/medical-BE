@@ -12,23 +12,35 @@ app.use(
     origin: "*",
   })
 );
+app.use(express.urlencoded({extended: true})); 
 
-// db.sync({ force: !true }).then(() => {
-//   Customer.create({
-//     name: "test",
-//     phone: "1234567890",
-//     address: "address here",
-//   });
+app.use(express.static('images'));
+// db.sync({ force: true }).then(() => {
 // });
 
 // routes
-const customerRouter = require("./routes/customer");
-const udhariRouter = require("./routes/udhari");
+// const udhariRouter = require("./routes/udhari");
 const productRouter = require("./routes/product");
 
-app.use("/customers", customerRouter);
-app.use("/udharis", udhariRouter);
+
+const multer  = require('multer');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({storage});
+
+
+
+
+// app.use("/customers", customerRouter);
+// app.use("/udharis", udhariRouter);
 app.use("/products", productRouter);
+app.use("/banners", productRouter);
 
 app.listen(process.env.PORT, () =>
   console.log("Server running on: ", process.env.PORT)
